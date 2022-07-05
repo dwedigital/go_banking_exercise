@@ -4,18 +4,21 @@ import (
 	models "banking/models"
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"sort"
-	"strings"
 	"strconv"
-	"log"
+	"strings"
 )
+
+// global variables
+// slice of account numbers used for sorting
 
 func main() {
 	fmt.Println("Hello, World!")
-
-	// sort the keys of the map
+	// TODO create a separate function to sort accounts and return the sorted map
 	var accountNumbers []int
+	// sort the keys of the map
 	for k := range models.Customers() {
 		accountNumbers = append(accountNumbers, k)
 	}
@@ -49,7 +52,7 @@ func formatInput(text string) (input string) {
 
 func Program() {
 	text := getInput("Enter your account number:")
-	account,err := strconv.Atoi(text)
+	account, err := strconv.Atoi(text)
 	if err != nil {
 		log.Fatal(err)
 	}
