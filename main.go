@@ -12,22 +12,24 @@ import (
 )
 
 // global variables
-// slice of account numbers used for sorting
+var customers = models.Customers()
 
 func main() {
-	fmt.Println("Hello, World!")
 	// TODO create a separate function to sort accounts and return the sorted map
 	var accountNumbers []int
 	// sort the keys of the map
-	for k := range models.Customers() {
+	for k := range customers {
 		accountNumbers = append(accountNumbers, k)
 	}
 	sort.Ints(accountNumbers)
 
 	// iterate over the sorted keys and print account balances
 	for _, k := range accountNumbers {
-		fmt.Println(models.Customers()[k].CheckBalance())
+		fmt.Println(customers[k].CheckBalance())
 	}
+
+	customers[123].Withdraw(100.00)
+	fmt.Println(customers[123].CheckBalance())
 
 	Program()
 
