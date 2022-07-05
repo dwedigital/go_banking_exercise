@@ -7,6 +7,8 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"strconv"
+	"log"
 )
 
 func main() {
@@ -29,7 +31,8 @@ func main() {
 }
 
 // getInput gets the input from the user
-func getInput() string {
+func getInput(helpText string) string {
+	fmt.Printf("%s ", helpText)
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
 	text = formatInput(text)
@@ -45,6 +48,10 @@ func formatInput(text string) (input string) {
 }
 
 func Program() {
-	text := getInput()
-	fmt.Println(text)
+	text := getInput("Enter your account number:")
+	account,err := strconv.Atoi(text)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(models.Customers()[account].CheckBalance())
 }
